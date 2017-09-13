@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Test02 {
+	int max = 1;
 	
 	public Test02() {
 		/**
@@ -32,19 +33,33 @@ public class Test02 {
 		 * */
 	}
 	
-	private void countMap(String[] first, String[] second) {
+	Map<String,Integer> countMap(String[] first, String[] second) {
+		//테마를 셀 Hashmap
 		Map<String,Integer> countMap = new HashMap<String, Integer>();
 		
 		for (int i = 0; i < first.length; i++) {
+			//이미 존재하는지 확인
 			boolean checkDuple = countMap.containsKey(first[i]);
-			if (!checkDuple) {
-				countMap.put(first[i], 1);				
+			
+			if (!checkDuple) {				
+				countMap.put(first[i], 1);								//존재하지 않을 경우		
 			} else {
-				countMap.replace(first[i], countMap.get(first[i])+1);
+				max = Math.max(max, countMap.get(first[i])+1);			//최대값을 구한다
+				countMap.replace(first[i], countMap.get(first[i])+1);	//존재할 경우
 			}		
 		}
 		
-		
+		for (int i = 0; i < second.length; i++) {
+			//이미 존재하는지 확인
+			boolean checkDuple = countMap.containsKey(second[i]);
+			
+			if (!checkDuple) {				
+				countMap.put(second[i], 1);								//존재하지 않을 경우		
+			} else {
+				max = Math.max(max, countMap.get(second[i])+1);			//최대값을 구한다
+				countMap.replace(second[i], countMap.get(second[i])+1);	//존재할 경우
+			}		
+		}
+		return countMap;
 	}
-
 }
