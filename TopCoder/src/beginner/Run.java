@@ -5,7 +5,8 @@ import java.util.Map;
 public class Run {
 	
 	public static void main(String[] args) {
-		test02();
+		Test03 test = new Test03();
+		test.solve();
 	}
 	
 	private static void test01() {
