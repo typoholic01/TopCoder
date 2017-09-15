@@ -5,8 +5,10 @@ import java.util.Map;
 public class Run {
 	
 	public static void main(String[] args) {
-		Test03 test = new Test03();
-		test.solve();
+		Test04 test = new Test04();
+		String answer = test.convertDecimal(16, 999);
+		
+		System.out.println(answer);
 	}
 	
 	private static void test01() {
