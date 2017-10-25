@@ -4,9 +4,38 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Test02 {
-	int max = 1;
+	Map<String,Integer> storyMap; 	//화젯거리를 담을 Hashmap
+	int max = 1;					//최대값
 	
-	public Test02() {
+	public Test02(String[] first, String[] second) {
+		//init
+		storyMap = new HashMap<>();
+		
+		//run
+		setStoryMap(first);
+		setStoryMap(second);
+	}
+	
+	//화젯거리를 담는다
+	private void setStoryMap(String[] story) {
+		for (int i = 0; i < story.length; i++) {
+			//이미 존재하는지 확인
+			boolean checkDuple = storyMap.containsKey(story[i]);
+			
+			if (!checkDuple) {											//존재하지 않을 경우	
+				storyMap.put(story[i], 1);	
+			} else {													//존재할 경우
+				max = Math.max(max, storyMap.get(story[i])+1);			//최대값을 갱신한다
+				storyMap.replace(story[i], storyMap.get(story[i])+1);
+			}		
+		}
+		
+	}
+	
+	
+	
+	@SuppressWarnings("unused")
+	private void explain() {
 		/**
 		 * 친구 i
 		 * i 친구의 첫번째 흥미로운 화제 first(i)
@@ -31,35 +60,5 @@ public class Test02 {
 		 * 3
 		 * 
 		 * */
-	}
-	
-	Map<String,Integer> countMap(String[] first, String[] second) {
-		//테마를 셀 Hashmap
-		Map<String,Integer> countMap = new HashMap<String, Integer>();
-		
-		for (int i = 0; i < first.length; i++) {
-			//이미 존재하는지 확인
-			boolean checkDuple = countMap.containsKey(first[i]);
-			
-			if (!checkDuple) {				
-				countMap.put(first[i], 1);								//존재하지 않을 경우		
-			} else {
-				max = Math.max(max, countMap.get(first[i])+1);			//최대값을 구한다
-				countMap.replace(first[i], countMap.get(first[i])+1);	//존재할 경우
-			}		
-		}
-		
-		for (int i = 0; i < second.length; i++) {
-			//이미 존재하는지 확인
-			boolean checkDuple = countMap.containsKey(second[i]);
-			
-			if (!checkDuple) {				
-				countMap.put(second[i], 1);								//존재하지 않을 경우		
-			} else {
-				max = Math.max(max, countMap.get(second[i])+1);			//최대값을 구한다
-				countMap.replace(second[i], countMap.get(second[i])+1);	//존재할 경우
-			}		
-		}
-		return countMap;
 	}
 }
